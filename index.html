@@ -39,7 +39,8 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+
   <style>
     :root {
       --bg: #0a0a0a;
@@ -96,6 +97,19 @@
       opacity: 0.4;
     }
 
+    /* DESCENDER FIX - forces browser to allocate space for deep j/g descenders in Syne */
+    h1, h2, h3, .nav-logo {
+      font-feature-settings: "kern" 1;
+      -webkit-font-smoothing: antialiased;
+    }
+    h2.section-title {
+      padding-bottom: 0.4em !important;
+      margin-bottom: 2rem !important;
+      box-sizing: content-box !important;
+      overflow: visible !important;
+      display: block !important;
+    }
+
     /* NAV */
     nav {
       position: fixed;
@@ -104,18 +118,22 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1.5rem 3rem;
+      padding: 1.2rem 3rem 1.8rem;
       border-bottom: 1px solid var(--border);
       background: rgba(10,10,10,0.85);
       backdrop-filter: blur(12px);
+      overflow: visible;
     }
     .nav-logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-weight: 800;
       font-size: 1.1rem;
       color: var(--accent);
       text-decoration: none;
       letter-spacing: -0.02em;
+      line-height: 1.8;
+      display: table;
+      overflow: visible;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
@@ -156,20 +174,25 @@
       animation: fadeUp 0.8s ease both;
     }
     .hero-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(3.5rem, 10vw, 9rem);
       font-weight: 800;
-      line-height: 1.3;
+      line-height: 1.4;
       letter-spacing: -0.04em;
       margin-bottom: 0.5rem;
       overflow: visible;
-      display: block;
-      clip-path: none !important;
+      display: table;
       animation: fadeUp 0.8s ease 0.1s both;
+    }
+    .hero-name-inner {
+      display: inline-block;
+      padding-bottom: 0.4em;
+      margin-bottom: -0.2em;
+      overflow: visible;
     }
     .hero-name .accent { color: var(--accent); }
     .hero-alias {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(1.5rem, 4vw, 3.5rem);
       font-weight: 400;
       color: var(--muted);
@@ -234,21 +257,17 @@
       margin-bottom: 1rem;
     }
     .section-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(2rem, 5vw, 4rem);
       font-weight: 800;
       letter-spacing: -0.03em;
       margin-bottom: 2.5rem;
-      line-height: 1.3;
+      line-height: 1.8;
       overflow: visible;
-      display: block;
-      clip-path: none !important;
+      display: table;
     }
-    .section-title span.tl {
-      display: inline;
-      padding-bottom: 0.4em;
-      box-decoration-break: clone;
-      -webkit-box-decoration-break: clone;
+    .section-title > span {
+      display: table;
     }
 
     /* ABOUT */
@@ -285,7 +304,7 @@
     }
     .stat-box:hover::before { transform: scaleX(1); }
     .stat-num {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: 2.5rem;
       font-weight: 800;
       color: var(--accent);
@@ -356,7 +375,7 @@
       margin-bottom: 1rem;
     }
     .project-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: 1.4rem;
       font-weight: 700;
       margin-bottom: 0.8rem;
@@ -406,7 +425,7 @@
     }
     .contact-text { font-size: 0.9rem; line-height: 1.8; color: #ccc; }
     .contact-big {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Chakra Petch', sans-serif;
       font-size: clamp(1.5rem, 4vw, 3rem);
       font-weight: 800;
       line-height: 1.1;
@@ -486,7 +505,7 @@
 
   <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo">cal.me_j</a>
+    <a href="#hero" class="nav-logo">cal.me_j&#8203;</a>
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#skills">Skills</a></li>
@@ -499,8 +518,8 @@
   <section id="hero">
     <div class="hero-grid-bg"></div>
     <div class="hero-tag">// Available for work</div>
-    <h1 class="hero-name">Jesse<br><span class="accent">Muuya.</span></h1>
-    <div class="hero-alias">aka cal.me_j ;)</div></br>
+    <h1 class="hero-name"><span class="hero-name-inner">Jesse<br><span class="accent">Muuya.</span></span></h1>
+    <div class="hero-alias">aka cal.me_j ;)</div>
     <p class="hero-bio">
       Yo! Need software? Well you're at the right place — I'm up for the challenge! 
       From websites to mobile apps and anything in between (I'll even build you a game!) 
@@ -516,7 +535,7 @@
   <!-- ABOUT -->
   <section id="about">
     <div class="section-label">// 01 — About</div>
-    <div class="title-wrap"><h2 class="section-title reveal">Who is<br>cal.me_j?</h2></div>
+    <div class="title-wrap"><h2 class="section-title"><span>Who is<br>cal.me_j? ;)</span></h2></div>
     <div class="about-grid">
       <div class="about-text reveal">
         <p>I'm Jesse Muuya — a Full Stack Developer who loves building things that actually work and look great doing it. Whether it's a sleek web app, a cross-platform mobile experience, or something completely out of the box, I'm in.</p>
@@ -547,7 +566,7 @@
   <!-- SKILLS -->
   <section id="skills">
     <div class="section-label">// 02 — Skills</div>
-    <div class="title-wrap"><h2 class="section-title reveal">What I<br>Work With</h2></div>
+    <div class="title-wrap"><h2 class="section-title"><span>What I<br>Work With</span></h2></div>
     <div class="skills-grid reveal">
       <div class="skill-pill">React</div>
       <div class="skill-pill">Node.js</div>
@@ -568,7 +587,7 @@
   <!-- PROJECTS -->
   <section id="projects">
     <div class="section-label">// 03 — Projects</div>
-    <div class="title-wrap"><h2 class="section-title reveal">Things I've<br>Built</h2></div>
+    <div class="title-wrap"><h2 class="section-title"><span>Things I've<br>Built</span></h2></div>
     <div class="projects-grid">
 
       <div class="project-card reveal">
@@ -626,7 +645,7 @@
     <div class="section-label">// 04 — Contact</div>
     <div class="contact-inner">
       <div>
-        <div class="title-wrap"><h2 class="section-title reveal" style="margin-bottom:1rem;">Let's Build<br>Something<span style="color:var(--accent)">.</span></h2></div>
+        <div class="title-wrap"><h2 class="section-title" style="margin-bottom:1rem;"><span>Let's Build<br>Something<span style="color:var(--accent)">.</span></span></h2></div>
         <p class="contact-text reveal">Got a project in mind? Want to collaborate? Or just want to say hey? My DMs are open. Let's get building!</p>
       </div>
       <div class="social-links reveal">
