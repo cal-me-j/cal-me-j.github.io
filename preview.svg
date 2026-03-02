@@ -1,0 +1,114 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&amp;display=swap');
+    </style>
+    <!-- Grid pattern -->
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#00ff88" stroke-width="0.3" opacity="0.15"/>
+    </pattern>
+    <!-- Glow filter for green text -->
+    <filter id="glow-green">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Glow filter for pink -->
+    <filter id="glow-pink">
+      <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Scanline pattern -->
+    <pattern id="scanlines" width="1" height="4" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="black" opacity="0.08"/>
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+
+  <!-- Grid overlay -->
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- Scanlines -->
+  <rect width="1200" height="630" fill="url(#scanlines)"/>
+
+  <!-- Left accent bar -->
+  <rect x="0" y="0" width="4" height="630" fill="#00ff88" opacity="0.9"/>
+
+  <!-- Top bar - terminal chrome -->
+  <rect x="0" y="0" width="1200" height="52" fill="#111111"/>
+  <rect x="0" y="52" width="1200" height="1" fill="#00ff88" opacity="0.3"/>
+
+  <!-- Terminal dots -->
+  <circle cx="32" cy="26" r="8" fill="#ff3cac" filter="url(#glow-pink)"/>
+  <circle cx="60" cy="26" r="8" fill="#ffbe2e"/>
+  <circle cx="88" cy="26" r="8" fill="#00ff88" filter="url(#glow-green)"/>
+
+  <!-- Terminal title -->
+  <text x="600" y="32" font-family="monospace" font-size="13" fill="#666" text-anchor="middle" letter-spacing="2">cal.me_j — portfolio.sh</text>
+
+  <!-- Main content area -->
+  <!-- Line 1: prompt -->
+  <text x="60" y="140" font-family="monospace" font-size="22" fill="#ff3cac" filter="url(#glow-pink)" letter-spacing="1">visitor@cal.me_j:~$</text>
+  <text x="340" y="140" font-family="monospace" font-size="22" fill="#00ff88" filter="url(#glow-green)" letter-spacing="1"> whoami</text>
+
+  <!-- Line 2: output name -->
+  <text x="60" y="195" font-family="monospace" font-size="48" font-weight="bold" fill="#ffffff" letter-spacing="-1">Jesse Muuya</text>
+  <text x="620" y="195" font-family="monospace" font-size="28" fill="#00ff88" filter="url(#glow-green)"> // cal.me_j</text>
+
+  <!-- Line 3: prompt -->
+  <text x="60" y="255" font-family="monospace" font-size="22" fill="#ff3cac" filter="url(#glow-pink)" letter-spacing="1">visitor@cal.me_j:~$</text>
+  <text x="340" y="255" font-family="monospace" font-size="22" fill="#00ff88" filter="url(#glow-green)" letter-spacing="1"> role</text>
+
+  <!-- Line 4: role output -->
+  <text x="60" y="305" font-family="monospace" font-size="28" fill="#cccccc" letter-spacing="1">Full Stack Developer</text>
+
+  <!-- Line 5: prompt -->
+  <text x="60" y="360" font-family="monospace" font-size="22" fill="#ff3cac" filter="url(#glow-pink)" letter-spacing="1">visitor@cal.me_j:~$</text>
+  <text x="340" y="360" font-family="monospace" font-size="22" fill="#00ff88" filter="url(#glow-green)" letter-spacing="1"> stack</text>
+
+  <!-- Line 6: stack tags -->
+  <!-- React tag -->
+  <rect x="60" y="378" width="100" height="32" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.6"/>
+  <text x="110" y="399" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" filter="url(#glow-green)">React</text>
+
+  <rect x="172" y="378" width="110" height="32" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.6"/>
+  <text x="227" y="399" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" filter="url(#glow-green)">Node.js</text>
+
+  <rect x="294" y="378" width="125" height="32" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.6"/>
+  <text x="356" y="399" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" filter="url(#glow-green)">MongoDB</text>
+
+  <rect x="431" y="378" width="120" height="32" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.6"/>
+  <text x="491" y="399" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" filter="url(#glow-green)">Express</text>
+
+  <rect x="563" y="378" width="100" height="32" fill="none" stroke="#00ff88" stroke-width="1" opacity="0.6"/>
+  <text x="613" y="399" font-family="monospace" font-size="14" fill="#00ff88" text-anchor="middle" filter="url(#glow-green)">Python</text>
+
+  <!-- Line 7: prompt -->
+  <text x="60" y="460" font-family="monospace" font-size="22" fill="#ff3cac" filter="url(#glow-pink)" letter-spacing="1">visitor@cal.me_j:~$</text>
+  <text x="340" y="460" font-family="monospace" font-size="22" fill="#00ff88" filter="url(#glow-green)" letter-spacing="1"> status</text>
+
+  <!-- Line 8: status with blinking cursor block -->
+  <text x="60" y="510" font-family="monospace" font-size="22" fill="#cccccc" letter-spacing="1">Available for work</text>
+  <!-- Blinking cursor indicator -->
+  <rect x="310" y="490" width="14" height="22" fill="#00ff88" opacity="0.9" filter="url(#glow-green)"/>
+
+  <!-- Bottom right: URL -->
+  <text x="1140" y="600" font-family="monospace" font-size="16" fill="#444" text-anchor="end" letter-spacing="1">cal-me-j.github.io</text>
+
+  <!-- Right side decorative vertical text -->
+  <text x="1160" y="400" font-family="monospace" font-size="13" fill="#1a1a1a" text-anchor="middle" letter-spacing="4" transform="rotate(90, 1160, 400)">FULL STACK DEVELOPER // OPEN TO WORK</text>
+
+  <!-- Corner accent -->
+  <line x1="1150" y1="60" x2="1190" y2="60" stroke="#ff3cac" stroke-width="2" filter="url(#glow-pink)"/>
+  <line x1="1190" y1="60" x2="1190" y2="100" stroke="#ff3cac" stroke-width="2" filter="url(#glow-pink)"/>
+
+  <line x1="10" y1="570" x2="50" y2="570" stroke="#00ff88" stroke-width="2" filter="url(#glow-green)"/>
+  <line x1="10" y1="570" x2="10" y2="530" stroke="#00ff88" stroke-width="2" filter="url(#glow-green)"/>
+</svg>
