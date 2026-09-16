@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>African Payment Gateway Engine — STK Push, Webhooks & Reconciliation for Node.js</title>
+<meta name="description" content="A TypeScript engine for M-Pesa STK Push, Paystack, and Flutterwave — signed webhooks, phone normalization, and dropped-transaction reconciliation, built once so you don't have to.">
+
+<meta property="og:title" content="African Payment Gateway Engine — Node.js / TypeScript">
+<meta property="og:description" content="Stop rebuilding M-Pesa STK Push, webhook verification, and reconciliation from scratch. A tested TypeScript engine for Paystack, Flutterwave, and M-Pesa.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --ink: #14181f;
+    --ink-soft: #2a3140;
+    --paper: #f6f4ee;
+    --paper-dim: #eae6da;
+    --line: #d8d2c0;
+    --pending: #b8813a;
+    --pending-bg: #f3e6d2;
+    --success: #3f6e5c;
+    --success-bg: #dfe9e2;
+    --code-bg: #1b2028;
+    --code-text: #dfe3ea;
+    --code-accent: #e0a458;
+    --accent: #8a4f2e;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { color-scheme: light; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, pre, .mono {
+    font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---- Header / hero ---- */
+
+  header.hero {
+    border-bottom: 1px solid var(--line);
+    padding: 64px 0 56px;
+  }
+
+  .brand {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+  }
+
+  .brand a { text-decoration: none; border-bottom: 1px solid var(--line); }
+
+  h1 {
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.15;
+    font-weight: 500;
+    margin: 0 0 20px;
+    max-width: 15ch;
+  }
+
+  .lede {
+    font-size: 18px;
+    max-width: 58ch;
+    color: var(--ink-soft);
+    margin: 0 0 32px;
+  }
+
+  .failure-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0 0 36px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+  }
+
+  .failure-strip .row {
+    display: flex;
+    gap: 10px;
+    align-items: baseline;
+    color: var(--ink-soft);
+  }
+
+  .status-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pending);
+    flex-shrink: 0;
+    position: relative;
+    top: -1px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-top: 8px;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 13px 22px;
+    text-decoration: none;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 14px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-secondary {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+
+  /* ---- Sections ---- */
+
+  section {
+    padding: 52px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  section:last-of-type { border-bottom: none; }
+
+  h2 {
+    font-size: 22px;
+    font-weight: 500;
+    margin: 0 0 8px;
+  }
+
+  .section-note {
+    color: var(--ink-soft);
+    font-size: 15px;
+    max-width: 56ch;
+    margin: 0 0 28px;
+  }
+
+  /* ---- Problem/fix pairs ---- */
+
+  .pair {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-bottom: 36px;
+  }
+
+  .pair:last-child { margin-bottom: 0; }
+
+  .pair-problem {
+    font-size: 15.5px;
+  }
+
+  .pair-problem strong {
+    display: block;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--pending);
+    margin-bottom: 4px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 18px 20px;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  pre .fn { color: var(--code-accent); }
+  pre .cm { color: #7d8494; }
+
+  /* ---- Tiers ---- */
+
+  .tiers {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .tier {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 6px 24px;
+    align-items: start;
+    padding: 24px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .tier:last-child { border-bottom: none; }
+
+  .tier-name {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+
+  .tier-title {
+    font-size: 17px;
+    font-weight: 500;
+    margin: 0 0 10px;
+  }
+
+  .tier-includes {
+    font-size: 14.5px;
+    color: var(--ink-soft);
+    margin: 0;
+    padding-left: 18px;
+  }
+
+  .tier-includes li { margin-bottom: 3px; }
+
+  .tier-price {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 20px;
+    text-align: right;
+    white-space: nowrap;
+    padding-top: 2px;
+  }
+
+  .tier-price .from {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-soft);
+    text-align: right;
+    font-weight: normal;
+  }
+
+  @media (max-width: 520px) {
+    .tier { grid-template-columns: 1fr; }
+    .tier-price { text-align: left; }
+    .tier-price .from { text-align: left; }
+  }
+
+  /* ---- States strip (pending/confirmed) ---- */
+
+  .states {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .state-chip {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 12.5px;
+    padding: 6px 12px;
+    border-radius: 3px;
+  }
+
+  .state-chip.pending { background: var(--pending-bg); color: var(--pending); }
+  .state-chip.success { background: var(--success-bg); color: var(--success); }
+
+  /* ---- Footer ---- */
+
+  footer {
+    padding: 40px 0 72px;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+
+  footer a { text-decoration: underline; text-decoration-color: var(--line); }
+
+  .fine-print {
+    margin-top: 20px;
+    font-size: 12.5px;
+    color: #7d7562;
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand"><a href="https://cal-me-j.github.io">cal-me-j</a> / jvoex labs</div>
+
+    <h1>Stop rebuilding M-Pesa integration from scratch, every project.</h1>
+    <p class="lede">
+      A TypeScript engine for Paystack, Flutterwave, and M-Pesa STK Push — signed webhooks,
+      phone-number normalization, and background reconciliation for the transactions that
+      silently get stuck in <code>PENDING</code>.
+    </p>
+
+    <div class="failure-strip">
+      <div class="row"><span class="status-dot" style="background:var(--pending)"></span> STK Push prompt sent, callback never arrives</div>
+      <div class="row"><span class="status-dot" style="background:var(--pending)"></span> Phone number arrives as <code>07...</code>, <code>254...</code>, or <code>+254...</code></div>
+      <div class="row"><span class="status-dot" style="background:var(--pending)"></span> Webhook body trusted without verifying it came from the provider</div>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/6b07f1e8-e706-46a6-8220-3fd66cfca91f">See pricing &amp; buy</a>
+      <a class="btn btn-secondary" href="https://github.com/cal-me-j/african-payment-gateway-lite">View free lite demo on GitHub</a>
+    </div>
+  </header>
+
+  <section id="what-it-solves">
+    <h2>Three failure points, solved once</h2>
+    <p class="section-note">
+      Pulled directly from integrating these providers in production — the parts that
+      cost real debugging time, not the parts covered by the providers' own docs.
+    </p>
+
+    <div class="pair">
+      <div class="pair-problem">
+        <strong>Dropped webhooks</strong>
+        A user enters their PIN late, the network stalls, and the callback that was supposed
+        to confirm payment never reaches your server. The transaction sits in
+        <code>PENDING</code> forever unless something actively checks on it.
+      </div>
+      <pre><span class="cm">// background reconciliation, runs on a schedule</span>
+<span class="fn">async function</span> reconcilePendingTransactions() {
+  <span class="fn">const</span> pending = <span class="fn">await</span> db.transaction.findMany({ where: { status: <span class="cm">'PENDING'</span> } });
+  <span class="fn">for</span> (<span class="fn">const</span> tx <span class="fn">of</span> pending) {
+    <span class="fn">const</span> result = <span class="fn">await</span> queryMpesaExpressStatus(tx.checkoutRequestId);
+    <span class="fn">if</span> (result.ResultCode === <span class="cm">'0'</span>) {
+      <span class="fn">await</span> db.transaction.update({ where: { id: tx.id }, data: { status: <span class="cm">'SUCCESS'</span> } });
+    }
+  }
+}</pre>
+    </div>
+
+    <div class="pair">
+      <div class="pair-problem">
+        <strong>Inconsistent phone formats</strong>
+        M-Pesa and regional gateways require strict E.164 (<code>+254XXXXXXXXX</code>).
+        Users type <code>0712...</code>, <code>254712...</code>, or the full international
+        format interchangeably — and a bad regex fails silently mid-request.
+      </div>
+      <pre><span class="fn">export function</span> normalizeKenyanPhone(phone: string): string {
+  <span class="fn">let</span> cleaned = phone.replace(<span class="cm">/[^\d+]/g</span>, <span class="cm">''</span>);
+  <span class="fn">if</span> (cleaned.startsWith(<span class="cm">'0'</span>)) cleaned = <span class="cm">`+254${cleaned.slice(1)}`</span>;
+  <span class="fn">else if</span> (cleaned.startsWith(<span class="cm">'254'</span>)) cleaned = <span class="cm">`+${cleaned}`</span>;
+  <span class="fn">else if</span> (!cleaned.startsWith(<span class="cm">'+254'</span>)) <span class="fn">throw new</span> Error(<span class="cm">`Invalid phone: ${phone}`</span>);
+  <span class="fn">return</span> cleaned;
+}</pre>
+    </div>
+
+    <div class="pair">
+      <div class="pair-problem">
+        <strong>Unverified webhook payloads</strong>
+        Anyone who finds your webhook URL can POST a fake "payment succeeded" body unless
+        you cryptographically verify it came from the provider — before it ever reaches
+        your database.
+      </div>
+      <pre><span class="fn">export const</span> PaystackWebhookSchema = z.object({
+  event: z.string(),
+  data: z.object({
+    status: z.enum([<span class="cm">'success'</span>, <span class="cm">'failed'</span>, <span class="cm">'abandoned'</span>]),
+    reference: z.string(),
+    amount: z.number(),
+    metadata: z.object({ tenantId: z.string() }).passthrough(),
+  }),
+});
+<span class="cm">// + raw-buffer HMAC signature check before this schema ever runs</span></pre>
+    </div>
+
+    <div class="states">
+      <span class="state-chip pending">PENDING → checked on schedule</span>
+      <span class="state-chip success">SUCCESS → confirmed by provider, not assumed</span>
+    </div>
+  </section>
+
+  <section id="pricing">
+    <h2>Pick what you need</h2>
+    <p class="section-note">
+      Each tier includes everything below it. Single-developer commercial license;
+      resale or public re-hosting of the source isn't permitted.
+    </p>
+
+    <div class="tiers">
+      <div class="tier">
+        <div>
+          <div class="tier-name">Tier 1 — Data Contracts</div>
+          <h3 class="tier-title">Validation schemas &amp; types</h3>
+          <ul class="tier-includes">
+            <li>Zod schemas for Paystack / Flutterwave / M-Pesa payloads</li>
+            <li>Full TypeScript types for transaction and webhook shapes</li>
+          </ul>
+        </div>
+        <div class="tier-price">$19</div>
+      </div>
+
+      <div class="tier">
+        <div>
+          <div class="tier-name">Tier 2 — Core Engine</div>
+          <h3 class="tier-title">Everything to integrate, standalone</h3>
+          <ul class="tier-includes">
+            <li>Everything in Tier 1</li>
+            <li>Phone normalizer, signed-webhook verification, fetch-based gateway client</li>
+            <li>Working Express sandbox route to test against immediately</li>
+          </ul>
+        </div>
+        <div class="tier-price">$49</div>
+      </div>
+
+      <div class="tier">
+        <div>
+          <div class="tier-name">Tier 3 — Multi-Tenant Bundle</div>
+          <h3 class="tier-title">For SaaS platforms &amp; ERP modules</h3>
+          <ul class="tier-includes">
+            <li>Everything in Tiers 1 &amp; 2</li>
+            <li>Multi-tenant Prisma schema, background reconciliation cron</li>
+            <li>Production Dockerfile + PWA checkout frontend</li>
+          </ul>
+        </div>
+        <div class="tier-price">$99</div>
+      </div>
+    </div>
+
+    <div class="cta-row" style="margin-top: 28px;">
+      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/6b07f1e8-e706-46a6-8220-3fd66cfca91f">Go to checkout →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>
+      Read the full write-up on STK Push timeouts and webhook verification on
+      <a href="https://dev.to/cal-me_j/how-to-handle-m-pesa-stk-push-timeouts-webhook-verification-in-nodejs-typescript-fa1">dev.to</a>,
+      or check the free lite demo on
+      <a href="https://github.com/cal-me-j/african-payment-gateway-lite">GitHub</a>.
+    </p>
+    <p>Built by <a href="https://cal-me-j.github.io">Jesse Muuya</a> — Nairobi, Kenya.</p>
+    <p class="fine-print">Node.js 18+. TypeScript. Single-seat commercial license — permitted in commercial apps, resale or public repository hosting not permitted.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
