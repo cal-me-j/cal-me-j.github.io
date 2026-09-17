@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>React + Vite PWA Boilerplate — Auto-Update Service Worker, Zero Hosting Cost</title>
+<meta name="description" content="A React 18 + Vite + TypeScript PWA starter with a real update-available UX, automated icon generation, and zero ongoing hosting cost.">
+
+<meta property="og:title" content="React + Vite PWA Boilerplate">
+<meta property="og:description" content="Ship a mobile-first PWA with a proper update prompt instead of a silent, confusing cache refresh. Zero hosting cost.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<style>
+  :root {
+    --ink: #14181f;
+    --ink-soft: #2a3140;
+    --paper: #f6f4ee;
+    --line: #d8d2c0;
+    --stale: #a8471f;
+    --stale-bg: #f4ddd0;
+    --fresh: #3f6e5c;
+    --fresh-bg: #dfe9e2;
+    --code-bg: #1b2028;
+    --code-text: #dfe3ea;
+    --code-accent: #e0a458;
+    --cm: #7d8494;
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  code, pre, .mono { font-family: "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace; }
+  a { color: inherit; }
+
+  .wrap { max-width: 760px; margin: 0 auto; padding: 0 28px; }
+
+  header.hero { border-bottom: 1px solid var(--line); padding: 64px 0 56px; }
+
+  .brand {
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.02em;
+    color: var(--ink-soft);
+    margin-bottom: 40px;
+  }
+  .brand a { text-decoration: none; border-bottom: 1px solid var(--line); }
+
+  h1 {
+    font-size: clamp(30px, 5vw, 42px);
+    line-height: 1.15;
+    font-weight: 500;
+    margin: 0 0 20px;
+    max-width: 17ch;
+  }
+
+  .lede { font-size: 18px; max-width: 58ch; color: var(--ink-soft); margin: 0 0 32px; }
+
+  /* Tab-state visual — literal to what ReloadPrompt.tsx actually shows */
+  .tab-demo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 13px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin: 0 0 36px;
+    max-width: 420px;
+    background: #fff;
+  }
+  .tab-demo .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--stale); flex-shrink: 0; }
+  .tab-demo .label { color: var(--ink-soft); }
+  .tab-demo .action { margin-left: auto; color: var(--stale); font-weight: 500; }
+
+  .cta-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 8px; }
+  .btn { display: inline-block; padding: 13px 22px; text-decoration: none; font-family: "JetBrains Mono", monospace; font-size: 14px; border-radius: 3px; border: 1px solid transparent; }
+  .btn-primary { background: var(--ink); color: var(--paper); }
+  .btn-secondary { border-color: var(--ink); color: var(--ink); }
+
+  section { padding: 52px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  h2 { font-size: 22px; font-weight: 500; margin: 0 0 8px; }
+  .section-note { color: var(--ink-soft); font-size: 15px; max-width: 56ch; margin: 0 0 28px; }
+
+  .pair { display: grid; grid-template-columns: 1fr; gap: 14px; margin-bottom: 36px; }
+  .pair:last-child { margin-bottom: 0; }
+  .pair-problem { font-size: 15.5px; }
+  .pair-problem strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 12.5px; font-weight: 500; color: var(--stale); margin-bottom: 4px; }
+
+  pre { background: var(--code-bg); color: var(--code-text); padding: 18px 20px; border-radius: 4px; overflow-x: auto; font-size: 13px; line-height: 1.6; margin: 0; }
+  pre .fn { color: var(--code-accent); }
+  pre .cm { color: var(--cm); }
+
+  .states { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+  .state-chip { font-family: "JetBrains Mono", monospace; font-size: 12.5px; padding: 6px 12px; border-radius: 3px; }
+  .state-chip.stale { background: var(--stale-bg); color: var(--stale); }
+  .state-chip.fresh { background: var(--fresh-bg); color: var(--fresh); }
+
+  .includes { border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+  .item { display: grid; grid-template-columns: auto 1fr; gap: 4px 20px; align-items: start; padding: 20px 24px; border-bottom: 1px solid var(--line); }
+  .item:last-child { border-bottom: none; }
+  .item-tag { font-family: "JetBrains Mono", monospace; font-size: 12px; color: var(--ink-soft); padding-top: 2px; white-space: nowrap; }
+  .item-title { font-size: 15.5px; font-weight: 500; margin: 0 0 4px; }
+  .item-desc { font-size: 14.5px; color: var(--ink-soft); margin: 0; grid-column: 1 / -1; }
+
+  @media (max-width: 520px) {
+    .item { grid-template-columns: 1fr; }
+  }
+
+  .notice {
+    border: 1px solid var(--stale);
+    background: var(--stale-bg);
+    border-radius: 4px;
+    padding: 16px 20px;
+    font-size: 14px;
+    color: var(--stale);
+    margin-top: 24px;
+  }
+  .notice strong { display: block; margin-bottom: 4px; font-family: "JetBrains Mono", monospace; font-size: 12px; }
+
+  footer { padding: 40px 0 72px; font-size: 13.5px; color: var(--ink-soft); }
+  footer a { text-decoration: underline; text-decoration-color: var(--line); }
+  .fine-print { margin-top: 20px; font-size: 12.5px; color: #7d7562; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+  <header class="hero">
+    <div class="brand"><a href="https://cal-me-j.github.io">cal-me-j</a> / jvoex labs</div>
+
+    <h1>A PWA that tells users it updated — instead of quietly hoping they notice.</h1>
+    <p class="lede">
+      React 18 + Vite + TypeScript starter with a pre-configured service worker,
+      a real update-available prompt, and automated icon generation. Static build,
+      zero ongoing hosting cost.
+    </p>
+
+    <div class="tab-demo">
+      <span class="dot"></span>
+      <span class="label">A fresh app update is available!</span>
+      <span class="action">Update Now</span>
+    </div>
+
+    <div class="cta-row">
+      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">See pricing &amp; buy</a>
+      <a class="btn btn-secondary" href="https://cal-me-j.github.io/products/fintech-module/">Pair with the payment gateway engine</a>
+    </div>
+  </header>
+
+  <section id="what-it-solves">
+    <h2>The part every PWA starter gets wrong</h2>
+    <p class="section-note">
+      Most PWA setups either update silently mid-session (confusing — the user's
+      looking at code that changed under them) or never prompt at all (stale —
+      they're stuck on an old build until they manually clear cache).
+    </p>
+
+    <div class="pair">
+      <div class="pair-problem">
+        <strong>Silent updates break the user's mental model</strong>
+        A service worker swaps in new code while someone's mid-interaction, and now
+        what they're looking at doesn't match what's running. No warning, no explanation.
+      </div>
+      <pre><span class="cm">// ReloadPrompt.tsx — detects a waiting service worker</span>
+<span class="fn">const</span> {
+  needRefresh: [needRefresh, setNeedRefresh],
+  updateServiceWorker,
+} = useRegisterSW({
+  onRegistered(r) { console.log(<span class="cm">'Service worker registered'</span>, r); },
+  onRegisterError(error) { console.error(<span class="cm">'Registration failed'</span>, error); },
+});
+
+<span class="cm">// renders nothing until an update is actually waiting</span>
+<span class="fn">if</span> (!needRefresh) <span class="fn">return</span> null;</pre>
+    </div>
+
+    <div class="pair">
+      <div class="pair-problem">
+        <strong>The user decides when to reload, not the app</strong>
+        "Update Now" reloads onto the new build immediately. "Dismiss" clears the
+        prompt without forcing a reload — no interruption to whatever they were doing.
+      </div>
+      <pre><span class="fn">onClick</span>={() => updateServiceWorker(true)}>Update Now</button>
+<span class="fn">onClick</span>={() => setNeedRefresh(false)}>Dismiss</button></pre>
+    </div>
+
+    <div class="states">
+      <span class="state-chip stale">stale build → banner shown</span>
+      <span class="state-chip fresh">confirmed update → clean reload</span>
+    </div>
+  </section>
+
+  <section id="includes">
+    <h2>What's in the box</h2>
+    <p class="section-note">Everything below ships in the single package — no tiers, one price.</p>
+
+    <div class="includes">
+      <div class="item">
+        <span class="item-tag">service worker</span>
+        <div>
+          <h3 class="item-title">vite-plugin-pwa, pre-configured</h3>
+          <p class="item-desc">Auto-update registration set up out of the box — no manifest or workbox config to write yourself.</p>
+        </div>
+      </div>
+      <div class="item">
+        <span class="item-tag">component</span>
+        <div>
+          <h3 class="item-title">ReloadPrompt.tsx</h3>
+          <p class="item-desc">The update-available banner shown above. Self-contained, no external state library required.</p>
+        </div>
+      </div>
+      <div class="item">
+        <span class="item-tag">tooling</span>
+        <div>
+          <h3 class="item-title">Icon generation script</h3>
+          <p class="item-desc">One master .svg in, every favicon / apple-touch / maskable icon size out. Python + cairosvg.</p>
+        </div>
+      </div>
+      <div class="item">
+        <span class="item-tag">example</span>
+        <div>
+          <h3 class="item-title">PaymentCheckoutUI.tsx</h3>
+          <p class="item-desc">A working sample component calling a backend payment endpoint (M-Pesa / Paystack) — a real starting point to adapt, not a themeable production component.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice">
+      <strong>Known limitation</strong>
+      PaymentCheckoutUI.tsx requires a <code>tenantId</code> prop — it's not inferred
+      or defaulted. Always pass your real tenant identifier; see SETUP.md for detail.
+    </div>
+
+    <div class="cta-row" style="margin-top: 28px;">
+      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">Go to checkout →</a>
+    </div>
+  </section>
+
+  <footer>
+    <p>Pairs with the <a href="https://cal-me-j.github.io/products/fintech-module/">African Payment Gateway Engine</a> if you need the backend PaymentCheckoutUI.tsx talks to.</p>
+    <p>Built by <a href="https://cal-me-j.github.io">Jesse Muuya</a> — Nairobi, Kenya.</p>
+    <p class="fine-print">React 18+. Vite 5+. TypeScript 5+. Node 18+. Single-seat commercial license — permitted in commercial apps, resale or public repository hosting not permitted.</p>
+  </footer>
+
+</div>
+
+</body>
+</html>
