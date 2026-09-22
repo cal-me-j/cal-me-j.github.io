@@ -11,6 +11,8 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
+<script defer src="https://cloud.umami.is/script.js" data-website-id="072d5146-dbf8-417b-bcf9-ebac298c752a"></script>
+
 <style>
   :root {
     --ink: #14181f;
@@ -155,8 +157,8 @@
     </div>
 
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">See pricing &amp; buy</a>
-      <a class="btn btn-secondary" href="https://cal-me-j.github.io/products/fintech-module/">Pair with the payment gateway engine</a>
+      <a class="btn btn-primary" data-umami-event="checkout-click" data-umami-event-location="hero" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">See pricing &amp; buy</a>
+      <a class="btn btn-secondary" data-umami-event="cross-sell-click" data-umami-event-target="fintech-module" href="https://cal-me-j.github.io/products/fintech-module">Pair with the payment gateway engine</a>
     </div>
   </header>
 
@@ -250,12 +252,12 @@
     </div>
 
     <div class="cta-row" style="margin-top: 28px;">
-      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">Go to checkout →</a>
+      <a class="btn btn-primary" data-umami-event="checkout-click" data-umami-event-location="box-section" href="https://jvoex.lemonsqueezy.com/checkout/buy/b03913f0-f01c-446c-bd63-935ee80ec3e0">Go to checkout →</a>
     </div>
   </section>
 
   <footer>
-    <p>Pairs with the <a href="https://cal-me-j.github.io/products/fintech-module/">African Payment Gateway Engine</a> if you need the backend PaymentCheckoutUI.tsx talks to.</p>
+    <p>Pairs with the <a data-umami-event="cross-sell-click" data-umami-event-target="fintech-module" data-umami-event-location="footer" href="https://cal-me-j.github.io/products/fintech-module">African Payment Gateway Engine</a> if you need the backend PaymentCheckoutUI.tsx talks to.</p>
     <p>Built by <a href="https://cal-me-j.github.io">Jesse Muuya</a> — Nairobi, Kenya.</p>
     <p class="fine-print">React 18+. Vite 5+. TypeScript 5+. Node 18+. Single-seat commercial license — permitted in commercial apps, resale or public repository hosting not permitted.</p>
   </footer>

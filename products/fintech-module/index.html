@@ -11,6 +11,8 @@
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 
+<script defer src="https://cloud.umami.is/script.js" data-website-id="072d5146-dbf8-417b-bcf9-ebac298c752a"></script>
+
 <style>
   :root {
     --ink: #14181f;
@@ -322,8 +324,8 @@
     </div>
 
     <div class="cta-row">
-      <a class="btn btn-primary" href="https://jvoex.lemonsqueezy.com/checkout/buy/6b07f1e8-e706-46a6-8220-3fd66cfca91f">See pricing &amp; buy</a>
-      <a class="btn btn-secondary" href="https://github.com/cal-me-j/african-payment-gateway-lite">View free lite demo on GitHub</a>
+      <a class="btn btn-primary" data-umami-event="checkout-click" data-umami-event-location="hero" href="https://jvoex.lemonsqueezy.com/checkout/buy/6b07f1e8-e706-46a6-8220-3fd66cfca91f">See pricing &amp; buy</a>
+      <a class="btn btn-secondary" data-umami-event="github-demo-click" href="https://github.com/cal-me-j/african-payment-gateway-lite">View free lite demo on GitHub</a>
     </div>
   </header>
 
@@ -443,9 +445,10 @@
     </div>
 
     <div class="cta-row" style="margin-top: 28px;">
-      <a class="btn btn-primary" 
+      <a class="btn btn-primary lemonsqueezy-button" 
+        data-umami-event="checkout-click" data-umami-event-location="pricing"
         href="https://jvoex.lemonsqueezy.com/checkout/buy/6b07f1e8-e706-46a6-8220-3fd66cfca91f?embed=1" 
-        class="lemonsqueezy-button">Go to checkout →
+        >Go to checkout →
       </a>
       <script src="https://assets.lemonsqueezy.com/lemon.js" defer></script>
     </div>
@@ -454,7 +457,7 @@
   <footer>
     <p>
       Read the full write-up on STK Push timeouts and webhook verification on
-      <a href="https://dev.to/cal-me_j/how-to-handle-m-pesa-stk-push-timeouts-webhook-verification-in-nodejs-typescript-fa1">dev.to</a>,
+      <a data-umami-event="devto-link-click" href="https://dev.to/cal-me_j/how-to-handle-m-pesa-stk-push-timeouts-webhook-verification-in-nodejs-typescript-fa1">dev.to</a>,
       or check the free lite demo on
       <a href="https://github.com/cal-me-j/african-payment-gateway-lite">GitHub</a>.
     </p>
