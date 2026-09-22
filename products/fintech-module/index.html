@@ -347,7 +347,8 @@
   <span class="fn">for</span> (<span class="fn">const</span> tx <span class="fn">of</span> pending) {
     <span class="fn">const</span> result = <span class="fn">await</span> queryMpesaExpressStatus(tx.checkoutRequestId);
     <span class="fn">if</span> (result.ResultCode === <span class="cm">'0'</span>) {
-      <span class="fn">await</span> db.transaction.update({ where: { id: tx.id }, data: { status: <span class="cm">'SUCCESS'</span> } });
+      <span class="fn">await</span> yourFulfilmentHook(tx); <span class="cm">// grant the purchase first</span>
+      <span class="fn">await</span> db.transaction.update({ where: { id: tx.id }, data: { status: <span class="cm">'SUCCESS'</span> } }); <span class="cm">// only then mark settled</span>
     }
   }
 }</pre>
@@ -433,7 +434,7 @@
           <h3 class="tier-title">For SaaS platforms &amp; ERP modules</h3>
           <ul class="tier-includes">
             <li>Everything in Tiers 1 &amp; 2</li>
-            <li>Multi-tenant Prisma schema, background reconciliation cron</li>
+            <li>Multi-tenant Prisma schema, reconciliation script with a fulfilment hook you control</li>
             <li>Production Dockerfile + PWA checkout frontend</li>
           </ul>
         </div>
