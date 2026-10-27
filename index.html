@@ -8,11 +8,11 @@
   <meta name="keywords" content="Jesse Muuya, cal.me_j, Full Stack Developer, React Developer, Node.js, MongoDB, Kenya, Web Developer, Mobile App Developer"/>
   <meta name="author" content="Jesse Muuya"/>
   <link rel="canonical" href="https://cal-me-j.github.io/"/>
-  <link rel="icon" type="image/svg+xml" href="assets/share/logo.png"/>
+  <link rel="icon" type="image/png" href="assets/share/logo.png"/>
 
   <!-- Open Graph (for link previews on WhatsApp, LinkedIn, Twitter etc.) -->
   <meta property="og:title" content="Jesse Muuya | Full Stack Developer"/>
-  <meta property="og:description" content="Need software? You're at the right place. Websites, mobile apps, and anything in between."/>
+  <meta property="og:description" content="Need software? You're at the right place. Full Stack Developer building production web apps, payment integrations and AWS deployments. React, Node.js, TypeScript, PostgreSQL, Supabase."/>
   <meta property="og:type" content="website"/>
   <meta property="og:url" content="https://cal-me-j.github.io/"/>
   <meta property="og:image" content="https://cal-me-j.github.io/assets/share/preview.png"/>
@@ -34,13 +34,15 @@
     "jobTitle": "Full Stack Developer",
     "url": "https://cal-me-j.github.io",
     "sameAs": [
-      "https://github.com/cal-me-j"
+      "https://github.com/cal-me-j",
+      "https://www.linkedin.com/in/jesse-muuya-5285842b6",
+      "https://www.upwork.com/freelancers/~011a1492ace3c1b076"
     ],
-    "knowsAbout": ["React", "Node.js", "MongoDB", "Express", "Python", "WordPress"]
+    "knowsAbout": ["React","Node.js","TypeScript","PostgreSQL","Supabase","MongoDB","AWS","Nginx","Redis","Python"]
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Urbanist:wght@400;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet"/>
 
   <style>
     :root {
@@ -348,80 +350,6 @@
     }
     .skill-pill:hover { color: #000; border-color: var(--accent); }
     .skill-pill:hover::before { transform: translateY(0); }
-
-    /* CREDENTIALS */
-    .credentials-wrap { margin-top: 1rem; }
-    .credentials-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      margin-top: 1rem;
-    }
-    .badge-card {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      background: var(--bg);
-      text-decoration: none;
-      color: var(--text);
-      transition: all 0.3s;
-      flex: 1;
-      min-width: 280px;
-      max-width: 460px;
-      position: relative;
-      overflow: hidden;
-    }
-    .badge-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 2px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      transform: scaleX(0);
-      transform-origin: left;
-      transition: transform 0.3s ease;
-    }
-    .badge-card:hover { border-color: var(--accent); transform: translateY(-3px); }
-    .badge-card:hover::after { transform: scaleX(1); }
-    .badge-img-wrap {
-      width: 90px;
-      height: 90px;
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .badge-img {
-      width: 90px;
-      height: 90px;
-      object-fit: contain;
-      filter: drop-shadow(0 0 8px rgba(0,255,136,0.2));
-      transition: filter 0.3s;
-    }
-    .badge-card:hover .badge-img { filter: drop-shadow(0 0 14px rgba(0,255,136,0.5)); }
-    .badge-info { display: flex; flex-direction: column; gap: 0.4rem; }
-    .badge-name {
-      font-family: 'Chakra Petch', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--text);
-      line-height: 1.3;
-    }
-    .badge-issuer {
-      font-size: 0.7rem;
-      color: var(--muted);
-      letter-spacing: 0.05em;
-    }
-    .badge-verify {
-      font-size: 0.68rem;
-      color: var(--accent);
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      margin-top: 0.3rem;
-    }
-
 
     /* CREDENTIALS */
     .credentials-label {
@@ -746,9 +674,9 @@
     <h1 class="hero-name"><span class="hero-name-inner">Jesse<br><span class="accent">Muuya.</span></span></h1>
     <div class="hero-alias">aka cal.me_j ;)</div>
     <p class="hero-bio">
-      Yo! Need software? Well you're at the right place — I'm up for the challenge! 
-      From websites to mobile apps and anything in between (I'll even build you a game!) 
-      Just hit me up and we'll get building!
+      Full-stack developer shipping production systems in React, Node/TypeScript and PostgreSQL/Supabase, 
+      with payments (M-Pesa, Paystack, Flutterwave) and AWS deployments behind them. 
+      Growing toward cloud infrastructure and application security. Got a project? Let’s build it.
     </p>
     <div class="hero-cta">
       <a href="#projects" class="btn btn-primary">View Projects</a>
@@ -764,26 +692,38 @@
     <div class="title-wrap"><h2 class="section-title"><span>Who is<br>cal.me_j? ;)</span></h2></div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p>I'm Jesse Muuya — a Full Stack Developer who loves building things that actually work and look great doing it. Whether it's a sleek web app, a cross-platform mobile experience, or something completely out of the box, I'm in.</p>
-        <p>I work across the stack — React on the front, Node/Express on the back, MongoDB keeping the data, and Python when I feel like switching things up. I've also dabbled in WordPress and CodeIgniter for when the situation calls for it.</p>
-        <p>I believe great software should be fast, clean, and built with intention. Let's build something worth talking about.</p>
+        <p>
+          I'm Jesse Muuya — a Full Stack Developer who loves building things that actually work and 
+          look great doing it. Whether it's a sleek web app, a cross-platform mobile experience, or 
+          something completely out of the box, I'm in.
+        </p>
+        <p>
+          I work across the stack: React on the front, Node/Express and TypeScript on the back, 
+          PostgreSQL, Supabase and MongoDB for data, deployed on AWS EC2 behind Nginx with Redis 
+          where needed. Python, WordPress and CodeIgniter when the job calls for them.
+        </p>
+        <p>
+          I care about the parts users never see: role-based access, signed webhooks, 
+          validated inputs and traceable approvals, and I’m deepening that into cloud 
+          and security engineering.
+        </p>
       </div>
       <div class="about-stats reveal">
         <div class="stat-box">
-          <div class="stat-num">4+</div>
-          <div class="stat-label">Projects Shipped</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-num">7</div>
-          <div class="stat-label">Tech Stacks</div>
+          <div class="stat-num">8</div>
+          <div class="stat-label">Live Systems</div>
         </div>
         <div class="stat-box">
           <div class="stat-num">3</div>
-          <div class="stat-label">Platforms Covered</div>
+          <div class="stat-label">Payment Gateways</div>
         </div>
         <div class="stat-box">
-          <div class="stat-num">∞</div>
-          <div class="stat-label">Ideas to Build</div>
+          <div class="stat-num">2</div>
+          <div class="stat-label">Packaged Products</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">3</div>
+          <div class="stat-label">Certifications</div>
         </div>
       </div>
     </div>
@@ -822,7 +762,7 @@
     <div class="credentials-grid reveal">
 
       <a href="https://drive.google.com/file/d/1FcneC9j59PqH5Ugo7mfi9_Zgm0B90u61/view?usp=sharing" target="_blank" class="credential-card">
-        <img src="assets/cred/bsc-computer-science.png" alt="Building LLM-based AI Applications" class="credential-badge"/>
+        <img src="assets/cred/bsc-computer-science.png" alt="Bachelor of Science in Computer Science" class="credential-badge"/>
         <div class="credential-info">
           <div class="credential-name">Bachelor of Science in Computer Science</div>
           <div class="credential-issuer">Degree · Presbyterian University of East Africa</div>
@@ -862,52 +802,6 @@
       </a>
 
     </div>
-
-    <!-- CREDENTIALS -->
-    <!-- <div class="credentials-label reveal">// Verified Credentials</div>
-    <div class="credentials-grid reveal">
-
-      <a href="https://www.credly.com/earner/earned/badge/f6be9896-e343-4fc9-9bcc-f425af259612" target="_blank" class="credential-card">
-        <img 
-          src="assets/badge-cybersecurity.png" 
-          alt="Cybersecurity Fundamentals Badge"
-          class="credential-badge"
-        />
-        <div class="credential-info">
-          <div class="credential-name">Cybersecurity Fundamentals</div>
-          <div class="credential-issuer">Credly Verified</div>
-          <div class="credential-verify">↗ View Credential</div>
-        </div>
-      </a>
-
-      <a href="https://www.credly.com/earner/earned/badge/e71a2b80-b006-4d72-bd2f-aaef06b05204" target="_blank" class="credential-card">
-        <img 
-          src="assets/badge-cloud-computing.png" 
-          alt="Cloud Computing Fundamentals Badge"
-          class="credential-badge"
-        />
-        <div class="credential-info">
-          <div class="credential-name">Cloud Computing Fundamentals</div>
-          <div class="credential-issuer">Credly Verified</div>
-          <div class="credential-verify">↗ View Credential</div>
-        </div>
-      </a>
-
-      <a href="https://drive.google.com/file/d/1AP48wm5imZCOPjDlqV7-t-jZW4CULGh9/view?usp=drivesdk" target="_blank" class="credential-card">
-        <img 
-          src="assets/atf-ai-certificate-50%.png" 
-          alt="Cloud Computing Fundamentals Badge"
-          class="credential-badge"
-        />
-        <div class="credential-info">
-          <div class="credential-name">Building LLM-based AI Applications</div>
-          <div class="credential-issuer">ATF Verified</div>
-          <div class="credential-verify">↗ View Credential</div>
-        </div>
-      </a>
-
-    </div> -->
-
   </section>
 
   <!-- PROJECTS -->
@@ -919,7 +813,11 @@
       <div class="project-card reveal">
         <div class="project-num">01</div>
         <div class="project-name">CMS Platform</div>
-        <p class="project-desc">A Content Management Platform offering a site builder, video and blog uploads backed with YouTube API integration for auto update, free and paid Stream creation with AWS IVS for streams and Paystack for payments,Ticket creation with scan at the gate capability, Promo Codes for content promotion and much more!!</p>
+        <p class="project-desc">
+          Content platform for ObinnaTV Studios: site builder, YouTube-synced video and blog publishing, 
+          free and paid live streams (AWS IVS, Paystack), promo codes, and ticketing with gate-scan check-in. 
+          Hosted on AWS EC2.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">React</span>
           <span class="tech-tag">Express</span>
@@ -934,7 +832,10 @@
       <div class="project-card reveal">
         <div class="project-num">02</div>
         <div class="project-name">Methodist Membership</div>
-        <p class="project-desc">A full membership management system tailored specifically for the Methodist Church — handling records, attendance, and more.</p>
+        <p class="project-desc">
+          Membership management system for the Methodist Church covering registration, attendance, 
+          records and reporting, now being extended toward multi-tenant use.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">React</span>
           <span class="tech-tag">Express</span>
@@ -948,7 +849,10 @@
       <div class="project-card reveal">
         <div class="project-num">03</div>
         <div class="project-name">Attachme</div>
-        <p class="project-desc">A platform designed to help students land their first attachment/internship opportunity. Bridging the gap between students and organizations.</p>
+        <p class="project-desc">
+          Platform connecting students with attachment and internship opportunities and the organizations 
+          offering them. Built end to end: React, Node API, MongoDB, hosting and deployment.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">React</span>
           <span class="tech-tag">Node.js</span>
@@ -965,7 +869,11 @@
       <div class="project-card reveal">
         <div class="project-num">04</div>
         <div class="project-name">Political Intelligence System</div>
-        <p class="project-desc">A Survey and Report taking system, mostly used to track Popularity of Political figures and voter opinions accross the country, backed with IEBC Mapping from Nation -> County -> Constituency -> Ward -> Polling Station and up-to-date Registry of current leaders at each level President | Governor | Senator | Women's Rep. | Member of Parliament and their competitors for the upcoming 2027 General Election. Naturally the system is adaptable to any type of Survey and/or Reporting with Supabase for longterm storage of data and Excel Sheet for live data tracking, shareable to stake holders.</p>
+        <p class="project-desc">
+          Survey and reporting PWA tracking opinion on political figures, with IEBC mapping from 
+          county to polling station and a leader registry for 2027. Extended from a client prototype 
+          onto Supabase, with live Excel export.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">Vite / React</span>
           <span class="tech-tag">Supabase</span>
@@ -979,7 +887,11 @@
       <div class="project-card reveal">
         <div class="project-num">05</div>
         <div class="project-name">Road Works ERP</div>
-        <p class="project-desc">An ERP(Enterprise Resource Planning)-like system used to curb Fraud in Road Construction Projects, especially in terms of Fuel consumption and material usage, supported by a fuel-logging system where with close/reopen fuel levels so previous fuel levels automatically become new fuel levels during the next cycle, recording fuel top-up and working hours to calculate efficiency and track inconsistenct consumption rates to catch Fraudulent actions. Alsl backed with a role-permission module that gates each user to specific actions so a user is unable to request and approve requisitions for themselves with each approval being traceable, it also supports Warehouse/Site creation so multiple projects can be nonitored at the click of a button.</p>
+        <p class="project-desc">
+          ERP-style PWA for road construction that flags fuel and material fraud: close/reopen 
+          fuel cycles with efficiency tracking, role-based permissions (no self-approved requisitions), 
+          traceable approvals and multi-site support.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">Vite / React</span>
           <span class="tech-tag">Supabase</span>
@@ -993,7 +905,10 @@
       <div class="project-card reveal">
         <div class="project-num">06</div>
         <div class="project-name">Projects Tracker</div>
-        <p class="project-desc">A system built to help track Goverment Project in Meru County but with Country wide capability under the hood with full Country maping similar to the IEBC mapping used in Political intelligence System, It records progres of various projects and price shifts in general purpose Items to analyse performance of Political figures.</p>
+        <p class="project-desc">
+          Tracks government project progress and price movements for Meru County, with 
+          nationwide mapping built in, to help assess the performance of elected leaders.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">Vite / React</span>
           <span class="tech-tag">Supabase</span>
@@ -1007,7 +922,10 @@
       <div class="project-card reveal">
         <div class="project-num">07</div>
         <div class="project-name">Ticketing App</div>
-        <p class="project-desc">A simple and reliable ticketing system to maximise event management, integrated with the M-pesa Daraja API for secure and fast ticket access for clients.</p>
+        <p class="project-desc">
+          Event ticketing app with M-Pesa Daraja payments and a Supabase backend, giving 
+          attendees fast, secure ticket access and organizers simple event management.
+        </p>
         <div class="project-tech">
           <span class="tech-tag">Next.js</span>
           <span class="tech-tag">M-Pesa Daraja API</span>
@@ -1027,10 +945,12 @@
           <span class="tech-tag">Flet</span>
           <span class="tech-tag">Mobile</span>
         </div>
-        <div class="coming-soon">↗ Link coming soon...</div>
+        <a href="https://journal-prp-app.onrender.com">
+          <div class="coming-soon">↗ Click here to Check it out!</div>
+        </a>
       </div>
 
-      <div class="project-card reveal">
+      <!-- <div class="project-card reveal">
         <div class="project-num">09</div>
         <div class="project-name">Hacienda Website</div>
         <p class="project-desc">An informational website for the Hacienda place — clean, fast, and built to inform visitors about everything they need to know.</p>
@@ -1039,7 +959,7 @@
           <span class="tech-tag">Web</span>
         </div>
         <div class="coming-soon">↗ Link coming soon...</div>
-      </div>
+      </div> -->
 
     </div>
   </section>
@@ -1091,7 +1011,7 @@
         <p class="contact-text reveal">Got a project in mind? Want to collaborate? Or just want to say hey? My DMs are open. Let's get building!</p>
       </div>
       <div class="social-links reveal">
-        <a href="mailto:y0.cal.me.j@gmail.com" class="social-link">
+        <a href="mailto:jessemuuya555@gmail.com" class="social-link">
           <span class="social-icon">✉</span>
           Email Me
           <span class="social-platform">Email</span>
@@ -1101,10 +1021,15 @@
           cal-me-j
           <span class="social-platform">GitHub</span>
         </a>
-        <a href="https://www.linkedin.com/in/jesse-muuya-5285842b6?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="social-link">
+        <a href="https://www.linkedin.com/in/jesse-muuya-5285842b6" target="_blank" class="social-link">
           <span class="social-icon">⬡</span>
           Jesse Muuya
           <span class="social-platform">LinkedIn</span>
+        </a>
+        <a href="https://www.upwork.com/freelancers/~011a1492ace3c1b076" target="_blank" class="social-link">
+          <span class="social-icon">⬡</span>
+          Jesse M.
+          <span class="social-platform">Upwork</span>
         </a>
         <a href="https://twitter.com/cal_me_j" target="_blank" class="social-link">
           <span class="social-icon">✕</span>
