@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Road Works ERP: fuel, materials and approvals for road construction</title>
+<meta name="description" content="Road Works ERP tracks fuel cycles, material use and approvals across road-construction sites, with permissions enforced in the database.">
+<meta property="og:title" content="Road Works ERP">
+<meta property="og:description" content="Fuel, materials and approvals for road-construction projects, in one installable app.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --asphalt: #23272b;
+    --concrete: #e4e6e5;
+    --chalk: #eceae4;
+    --paint: #f2c230;
+    --ink: #1f2327;
+    --muted: #4b5258;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Barlow', 'Segoe UI', Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--concrete);
+  }
+  a:focus-visible { outline: 3px solid var(--paint); outline-offset: 3px; }
+
+  .hero {
+    background: var(--asphalt);
+    color: var(--chalk);
+    padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 6vw, 5rem) 0;
+  }
+  .hero-inner { max-width: 62rem; }
+  .brand {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 600;
+    font-size: 1.25rem;
+    letter-spacing: 0.02em;
+    color: var(--paint);
+    margin-bottom: 2.5rem;
+  }
+  h1 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.75rem, 8vw, 6rem);
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    max-width: 14ch;
+  }
+  .lede {
+    max-width: 38rem;
+    margin-top: 1.5rem;
+    font-size: 1.1875rem;
+    color: #cfcdc6;
+  }
+  .btn {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.85rem 1.9rem;
+    background: var(--paint);
+    color: var(--asphalt);
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1.25rem;
+    text-decoration: none;
+    border-radius: 2px;
+  }
+  .btn:hover { background: #ffd24d; }
+  /* the road's centre line: the one decorative element */
+  .centreline {
+    height: 6px;
+    margin-top: clamp(3rem, 7vw, 5rem);
+    background: repeating-linear-gradient(90deg, var(--paint) 0 56px, transparent 56px 104px);
+  }
+
+  main { padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 6vw, 5rem); }
+  h2 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    margin-bottom: 2rem;
+  }
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 2.25rem 3rem;
+    max-width: 62rem;
+    list-style: none;
+  }
+  .features li { border-left: 5px solid var(--paint); padding-left: 1.1rem; }
+  .features h3 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.15;
+    margin-bottom: 0.4rem;
+  }
+  .features p { color: var(--muted); max-width: 34ch; }
+
+  footer {
+    padding: 1.5rem clamp(1.25rem, 6vw, 5rem) 2.5rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+  footer a { color: var(--ink); font-weight: 500; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .btn { transition: background-color 0.15s ease; }
+  }
+</style>
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <p class="brand">Road Works ERP</p>
+      <h1>Every litre and every site, accounted for.</h1>
+      <p class="lede">Fuel, materials and approvals for road-construction projects, in one app your site teams can install on a phone.</p>
+      <a class="btn" href="https://erp.roadsproject.co.ke">Sign in</a>
+    </div>
+    <div class="centreline" role="presentation"></div>
+  </header>
+
+  <main>
+    <h2>What it keeps track of</h2>
+    <ul class="features">
+      <li>
+        <h3>Fuel, cycle by cycle</h3>
+        <p>Closing levels carry into the next cycle. Top-ups and working hours produce efficiency figures, so unusual consumption stands out.</p>
+      </li>
+      <li>
+        <h3>Approvals with a trail</h3>
+        <p>Each requisition step is recorded against a named person and time, so every approval can be traced.</p>
+      </li>
+      <li>
+        <h3>Permissions that hold</h3>
+        <p>Access rules are enforced in the database. Someone without approval rights cannot approve or dispatch, whatever screen they use.</p>
+      </li>
+      <li>
+        <h3>Many sites, one view</h3>
+        <p>Set up warehouses and project sites, and watch several projects from a single account.</p>
+      </li>
+    </ul>
+  </main>
+
+  <footer>
+    Designed and built by <a href="https://cal-me-j.github.io">Jesse Muuya</a>.
+  </footer>
+</body>
+</html>
